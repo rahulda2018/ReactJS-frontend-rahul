@@ -1,0 +1,122 @@
+.menu {
+  background-color: white;
+  box-shadow: 0px 2px 24px 0px rgba(255, 0, 0, 0.15);
+  border-radius: 8px;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  position: relative;
+}
+
+.submenu {
+  background-color: red;
+  box-shadow: 0px 2px 24px 0px rgba(255, 0, 0, 0, 0.15);
+  border-radius: 8px;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  position: relative;
+}
+
+.menu__right {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.menu__list {
+  list-style-type: none;
+  padding: 0;
+  height: 100%;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.menu__list-item {
+  display: inline-block;
+  height: 100%;
+  margin-right: 10px;
+}
+
+.menu__list-item:last-child {
+  margin-right: 0;
+}
+
+.menu__link {
+  color: #3a3e47;
+  display: inline-block;
+  height: 100%;
+  font-size: 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 0 3px;
+}
+
+.menu__link:hover {
+  color: red;
+}
+
+.menu__link--active {
+  color: red;
+  border-bottom: 10px solid red;
+  font-weight: 700;
+}
+
+.submenu__list {
+  list-style-type: none;
+  padding: 0;
+  height: 100%;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.submenu__list-item {
+  display: inline-block;
+  height: 100%;
+  margin-right: 10px;
+}
+
+.submenu__link {
+  color: black;
+  display: inline-block;
+  height: 100%;
+  font-size: 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 0 3px;
+}
+
+.submenu__link:hover {
+  color: white;
+}
+
+.submenu__link--active {
+  color: white;
+  border-bottom: 2px solid white;
+  font-weight: 700;
+}
+
+.menu__logo {
+  text-indent: -9999999px;
+  display: inline-block;
+  height: 100%;
+  width: 260px;
+  background-size: cover 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+}
+
+.menu__search-input {
+  outline: none;
+  border: 1px solid #c8c9ce;
+  font-size: 18px;
+  padding: 5px;
+  font-weight: 300;
+}

@@ -2,8 +2,8 @@
 
 ### Step 1:
 - Installed latest vrsion of Node - 10.15.3LTS (macOSx64) from the nodejs.org
-#### Go to CLI/Terninal
-#### npm install create-react-app --save
+- Go to CLI/Terninal
+- npm install create-react-app --save
 
 ### Step 2:
 #### Go to your Working folder

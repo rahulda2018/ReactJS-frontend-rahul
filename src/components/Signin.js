@@ -55,7 +55,6 @@ class Signin extends Component {
           redirect: true
         });
         //console.log(res.data);
-
         sessionStorage.setItem("jwtToken", res.data.accessToken);
         sessionStorage.setItem("loggedInUser", res.data.user.name);
         document.getElementById("signinplaceholder").innerText = "Sign Out";
@@ -79,32 +78,26 @@ class Signin extends Component {
         <table className="table">
           <tbody>
             <tr>
-              <td className="required">
-                <small>
-                  <b>Email address:</b>
-                </small>
-              </td>
+              <td className="required form_textlabel">Email address:</td>
               <td alight="left">
                 <input
                   type="text"
                   id="signin-email"
                   name="signin-email"
                   placeholder="Email address"
+                  className="form_text"
                 />
               </td>
             </tr>
             <tr>
-              <td className="required">
-                <small>
-                  <b>Password:</b>
-                </small>
-              </td>
+              <td className="required form_textlabel">Password:</td>
               <td>
                 <input
                   type="password"
                   id="signin-password"
                   name="signin-password"
                   placeholder="Password"
+                  className="form_text"
                 />
               </td>
             </tr>
@@ -122,14 +115,14 @@ class Signin extends Component {
               </td>
             </tr>
             <tr>
-              <td>
+              <td align="right">
                 <button className="button_link">
                   <b>
                     <small>Forgot password?</small>
                   </b>
                 </button>
               </td>
-              <td align="right">
+              <td align="left">
                 <button
                   className="button_link"
                   onClick={this.userregistraton()}

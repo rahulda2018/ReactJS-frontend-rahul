@@ -21,6 +21,7 @@ class LogOut extends Component {
     global.cartItemsArr = [];
     sessionStorage.clear();
     document.getElementById("signinplaceholder").innerText = "Signin";
+    document.getElementById("usernamemenu").innerText = "User";
 
     this.setState({
       redirect: true

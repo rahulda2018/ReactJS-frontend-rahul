@@ -113,7 +113,6 @@ class Menu extends Component {
     }
 
     let signInOut = "Sign In";
-    let userLabel = "User";
     let jwtToken = sessionStorage.getItem("jwtToken");
     let userName = sessionStorage.getItem("loggedInUser");
 

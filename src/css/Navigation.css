@@ -294,6 +294,65 @@ body {
   border-radius: 30px;
 }
 
+.form_text {
+  background-color: white;
+  box-shadow: 2px 2px 2px 2px rgba(255, 0, 0, 0.15);
+  border: none;
+  padding: 6px;
+  width: 250px;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  font-style: inherit;
+  margin: 4px 4px;
+  margin-top: 10px;
+}
+
+.form_text_small {
+  background-color: white;
+  box-shadow: 2px 2px 2px 2px rgba(255, 0, 0, 0.15);
+  border: none;
+  padding: 6px;
+  width: 130px;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  font-style: inherit;
+  margin: 4px 4px;
+  margin-top: 10px;
+}
+
+.form_text_long {
+  background-color: white;
+  box-shadow: 2px 2px 2px 2px rgba(255, 0, 0, 0.15);
+  border: none;
+  padding: 6px;
+  width: 400px;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  font-style: inherit;
+  margin: 4px 4px;
+  margin-top: 10px;
+}
+
+.form_textlabel {
+  background-color: white;
+  border: none;
+  padding: 6px;
+  width: 250px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  font-style: inherit;
+  margin: 4px 4px;
+  margin-top: 10px;
+}
+
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 400px) {
   width: 100%;

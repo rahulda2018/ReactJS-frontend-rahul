@@ -1,4 +1,20 @@
-## Instruction to Setup and start
+## Option 1: Instruction to Setup and Start
+
+### Step 1:
+- Download the zip file from the Git Repository 
+- Extract turing-frontend-rahul-master.zip. You will see src, public, package.json and README.md - these four under the project root folder
+
+- Go to turing-frontend-rahul-master folder in CLI
+- Run 'npm install'
+
+### Step 5:
+Once the 'npm install' command is successfull, finally Run
+- npm start
+
+This will launch the browser and the turing-frontend application.
+
+
+## Option 2: Detailed steps to configure - Fresh installation 
 
 ### Step 1:
 - Installed latest vrsion of Node - 10.15.3LTS (macOSx64) from the nodejs.org

@@ -7,7 +7,7 @@ import "./App.css";
 import Axios from "axios";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import UserProfile from "./components/UserProfile";
+import CustomerProfile from "./components/CustomerProfile";
 
 /**
  * Main entry point of the Application
@@ -133,7 +133,7 @@ class App extends Component {
             render={() => {
               return (
                 <div id="productPanel">
-                  <UserProfile />
+                  <CustomerProfile />
                 </div>
               );
             }}

@@ -7,14 +7,14 @@
 - Go to turing-frontend-rahul-master folder in CLI
 - Run 'npm install'
 
-### Step 5:
+### Step 2:
 Once the 'npm install' command is successfull, finally Run
 - npm start
 
 This will launch the browser and the turing-frontend application.
 
 
-## Option 2: Detailed steps to configure - Fresh installation 
+## Option 2: Detailed Steps-Fresh installation(Incase Option 1 doesn't work)
 
 ### Step 1:
 - Installed latest vrsion of Node - 10.15.3LTS (macOSx64) from the nodejs.org

@@ -62,8 +62,9 @@ class Signin extends Component {
         document.getElementById("usernamemenu").innerText = res.data.user.name;
       })
       .catch(e => {
-        console.error(`Failed to authenticate the user:`, e);
-        alert(`Failed to authenticate the user:${signin_email}`);
+        let errMesg = e.response.data.error.message;
+        console.error("Failed to Signin", errMesg);
+        alert(`Failed to Signin. ${errMesg}`);
         return;
       });
   };

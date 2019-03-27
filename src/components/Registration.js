@@ -42,8 +42,9 @@ class Registration extends Component {
         document.getElementById("productPanel").appendChild(div);
       })
       .catch(e => {
-        console.error("Failed to register the user:", e);
-        alert("Failed to register the user");
+        let errMesg = e.response.data.error.message;
+        console.error("Failed to register the user:", errMesg);
+        alert(`Failed to register the user. ${errMesg}`);
         return;
       });
   };

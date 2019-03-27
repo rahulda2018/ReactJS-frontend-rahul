@@ -123,7 +123,7 @@ class Menu extends Component {
       userName = "User";
     } else {
       signInOut = "Sign Out";
-      userName = userLabel;
+      userLabel = userName;
     }
     //NavLink to create the Menus
     let links = [

@@ -39,6 +39,7 @@ class UserProfile extends Component {
   getUserProfile() {
     let jwtToken = sessionStorage.getItem("jwtToken");
 
+    //console.log(`Get Customer - ${jwtToken}`);
     if (!jwtToken || jwtToken === "") {
       alert("Please signin first to update the profile");
       return;
@@ -46,7 +47,7 @@ class UserProfile extends Component {
 
     Axios.get("https://backendapi.turing.com/customer", {
       headers: {
-        "user-key": sessionStorage.getItem("jwtToken")
+        "user-key": jwtToken
       }
     })
       .then(json => {
@@ -54,7 +55,7 @@ class UserProfile extends Component {
         this.setState({
           custname: !json.data.name ? "" : json.data.name,
           custemail: !json.data.email ? "" : json.data.email,
-          custpassword: !json.data.password ? "" : json.data.password,
+          custpassword: "", //!json.data.password ? "" : json.data.password,
           custday_phone: !json.data.day_phone ? "" : json.data.day_phone,
           custeve_phone: !json.data.eve_phone ? "" : json.data.eve_phone,
           custmob_phone: !json.data.mob_phone ? "" : json.data.mob_phone,
@@ -71,6 +72,8 @@ class UserProfile extends Component {
       })
       .catch(e => {
         console.error("Failed to retrieve Customer data .", e);
+        let errMesg = e.response.data.error.message;
+        console.error("Failed to retrieve customer", errMesg);
       });
   }
   componentDidMount() {
@@ -79,41 +82,39 @@ class UserProfile extends Component {
 
   /**
    * This will update the customer information
-   * TODO: NEED TO FINE-TUNE THE REQUEST PARAMETER, CURRENTLY NOT WORKING
+   *
    */
 
   updateCustomerData = event => {
     event.preventDefault();
 
-    /*
-    headers: {
-        "user-key": sessionStorage.getItem("jwtToken")
+    let jwtToken = sessionStorage.getItem("jwtToken");
+    //console.log(`Put Customer - ${jwtToken}`);
+
+    Axios.put(
+      "https://backendapi.turing.com/customer",
+
+      {
+        name: this.state.custname,
+        email: this.state.custemail,
+        password: this.state.custpassword,
+        day_phone: this.state.custday_phone,
+        eve_phone: this.state.custeve_phone,
+        mob_phone: this.state.custmob_phone
       },
-      data: {
-        name: this.state.custname,
-        email: this.state.custemail,
-        password: this.state.custpassword,
-        day_phone: this.state.custday_phone,
-        eve_phone: this.state.custeve_phone,
-        mob_phone: this.state.custmob_phone
+      {
+        headers: {
+          "user-key": jwtToken
+        }
       }
-    */
-    //TODO - Need to change the request param
-    Axios.put("https://backendapi.turing.com/customer", {
-      data: {
-        name: this.state.custname,
-        email: this.state.custemail,
-        password: this.state.custpassword,
-        day_phone: this.state.custday_phone,
-        eve_phone: this.state.custeve_phone,
-        mob_phone: this.state.custmob_phone
-      }
-    })
+    )
       .then(json => {
-        //console.log(json.data);
+        //console.log(`Successfull ${json.data}`);
       })
       .catch(e => {
-        console.error("Failed to save Customer data .", e);
+        //console.error("Failed to save Customer data .", e);
+        let errMesg = e.response.data.error.message;
+        console.error("Failed to update", errMesg);
       });
   };
 
@@ -148,14 +149,12 @@ class UserProfile extends Component {
 
     return (
       <div align="center">
-        <h3 className="textcol_orange">
-          Customer Profile (Under Construction){" "}
-        </h3>
+        <h3 className="textcol_orange">Customer Profile </h3>
         <small>
           <table>
             <tbody>
               <tr>
-                <td alight="right">
+                <td className="form_textlabel">
                   Full name
                   <i className="required" />:
                 </td>
@@ -166,11 +165,12 @@ class UserProfile extends Component {
                     value={custname}
                     placeholder="Full name"
                     onChange={this.handleInputChange}
+                    className="form_text"
                   />
                 </td>
               </tr>
               <tr>
-                <td alight="right">
+                <td className="form_textlabel">
                   Email
                   <i className="required" />:
                 </td>
@@ -181,11 +181,12 @@ class UserProfile extends Component {
                     value={custemail}
                     placeholder="Email address"
                     onChange={this.handleInputChange}
+                    className="form_text"
                   />
                 </td>
               </tr>
               <tr>
-                <td alight="right">Password:</td>
+                <td className="form_textlabel">Password:</td>
                 <td>
                   <input
                     type="password"
@@ -193,11 +194,12 @@ class UserProfile extends Component {
                     value={custpassword}
                     placeholder="Password"
                     onChange={this.handleInputChange}
+                    className="form_text"
                   />
                 </td>
               </tr>
               <tr>
-                <td alight="right">Day Phone:</td>
+                <td className="form_textlabel">Day Phone:</td>
                 <td alight="left">
                   <input
                     type="text"
@@ -205,23 +207,25 @@ class UserProfile extends Component {
                     value={custday_phone}
                     placeholder="Day phone"
                     onChange={this.handleInputChange}
+                    className="form_text"
                   />
                 </td>
               </tr>
               <tr>
-                <td alight="right">Evening Phone:</td>
-                <td alight="left">
+                <td className="form_textlabel">Evening Phone:</td>
+                <td>
                   <input
                     type="text"
                     name="custeve_phone"
                     value={custeve_phone}
                     placeholder="Evening phone"
                     onChange={this.handleInputChange}
+                    className="form_text"
                   />
                 </td>
               </tr>
               <tr>
-                <td alight="right">Mobile Phone:</td>
+                <td className="form_textlabel">Mobile Phone:</td>
                 <td alight="left">
                   <input
                     type="text"
@@ -229,11 +233,12 @@ class UserProfile extends Component {
                     value={custmob_phone}
                     placeholder="Day phone"
                     onChange={this.handleInputChange}
+                    className="form_text"
                   />
                 </td>
               </tr>
               <tr>
-                <td alight="right">
+                <td className="form_textlabel">
                   Address 1<i className="required" />:
                 </td>
                 <td alight="left">
@@ -243,11 +248,12 @@ class UserProfile extends Component {
                     value={custaddress_1}
                     placeholder="Address 1"
                     onChange={this.handleInputChange}
+                    className="form_text_long"
                   />
                 </td>
               </tr>
               <tr>
-                <td alight="right">Address 2:</td>
+                <td className="form_textlabel">Address 2:</td>
                 <td alight="left">
                   <input
                     type="text"
@@ -255,11 +261,12 @@ class UserProfile extends Component {
                     value={custaddress_2}
                     placeholder="Address 2"
                     onChange={this.handleInputChange}
+                    className="form_text_long"
                   />
                 </td>
               </tr>
               <tr>
-                <td alight="right">
+                <td className="form_textlabel">
                   City
                   <i className="required" />:
                 </td>
@@ -270,11 +277,12 @@ class UserProfile extends Component {
                     value={custcity}
                     placeholder="City"
                     onChange={this.handleInputChange}
+                    className="form_text_small"
                   />
                 </td>
               </tr>
               <tr>
-                <td alight="right">
+                <td className="form_textlabel">
                   Region
                   <i className="required" />:
                 </td>
@@ -285,11 +293,12 @@ class UserProfile extends Component {
                     value={custregion}
                     placeholder="Region"
                     onChange={this.handleInputChange}
+                    className="form_text_small"
                   />
                 </td>
               </tr>
               <tr>
-                <td alight="right">
+                <td className="form_textlabel">
                   Postal Code
                   <i className="required" />:
                 </td>
@@ -300,11 +309,12 @@ class UserProfile extends Component {
                     value={custpostal_code}
                     placeholder="Postal Code:"
                     onChange={this.handleInputChange}
+                    className="form_text_small"
                   />
                 </td>
               </tr>
               <tr>
-                <td alight="right">
+                <td className="form_textlabel">
                   Country
                   <i className="required" />:
                 </td>
@@ -315,12 +325,13 @@ class UserProfile extends Component {
                     value={custcountry}
                     placeholder="Country:"
                     onChange={this.handleInputChange}
+                    className="form_text_small"
                   />
                 </td>
               </tr>
 
               <tr>
-                <td alight="right">
+                <td className="form_textlabel">
                   Shipping Region
                   <i className="required" />:
                 </td>
@@ -331,6 +342,7 @@ class UserProfile extends Component {
                     value={custshipping_region_id}
                     placeholder="Shipping Region"
                     onChange={this.handleInputChange}
+                    className="form_text_small"
                   />
                 </td>
               </tr>

@@ -185,7 +185,7 @@ class UserProfile extends Component {
     return (
       <div align="menu__list">
         <small>
-          <p>&nbsp;</p>
+          <p />
           <div className="form_div">
             <h3 className="textcol_orange">
               <small>Customer Profile </small>

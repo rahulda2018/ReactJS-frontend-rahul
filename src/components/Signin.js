@@ -73,76 +73,75 @@ class Signin extends Component {
    */
   render() {
     return (
-      <div align="center">
-        <h3 className="textcol_orange">Signin </h3>
-        <table className="table">
-          <tbody>
-            <tr>
-              <td className="required form_textlabel">Email address:</td>
-              <td alight="left">
-                <input
-                  type="text"
-                  id="signin-email"
-                  name="signin-email"
-                  placeholder="Email address"
-                  className="form_text"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td className="required form_textlabel">Password:</td>
-              <td>
-                <input
-                  type="password"
-                  id="signin-password"
-                  name="signin-password"
-                  placeholder="Password"
-                  className="form_text"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td />
-              <td align="left">
-                <input
-                  type="checkbox"
-                  id="signin-remember"
-                  name="signin-remember"
-                />{" "}
-                <b>
-                  <small>Remember</small>
-                </b>
-              </td>
-            </tr>
-            <tr>
-              <td align="right">
-                <button className="button_link">
-                  <b>
-                    <small>Forgot password?</small>
-                  </b>
-                </button>
-              </td>
-              <td align="left">
-                <button
-                  className="button_link"
-                  onClick={this.userregistraton()}
-                >
-                  <b>
-                    <small>New User!!</small>
-                  </b>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div />
+      <div>
         <p />
-        <p align="center">
-          {this.renderRedirect()}
-          <button className="button_login" onClick={this.usersignin}>
-            <b>Sign In</b>
-          </button>
-        </p>
+        <div className="form_div">
+          <h3 className="textcol_orange">Signin </h3>
+          <table align="center">
+            <tbody>
+              <tr>
+                <td className="required form_textlabel">Email address:</td>
+                <td alight="left">
+                  <input
+                    type="text"
+                    id="signin-email"
+                    name="signin-email"
+                    placeholder="Email address"
+                    className="form_text"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td className="required form_textlabel">Password:</td>
+                <td>
+                  <input
+                    type="password"
+                    id="signin-password"
+                    name="signin-password"
+                    placeholder="Password"
+                    className="form_text"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td />
+                <td align="left">
+                  <input
+                    type="checkbox"
+                    id="signin-remember"
+                    name="signin-remember"
+                  />{" "}
+                  <b>
+                    <small>Remember</small>
+                  </b>
+                </td>
+              </tr>
+              <tr>
+                <td align="right">
+                  <button className="button_link">
+                    <b>Forgot password?</b>
+                  </button>
+                </td>
+                <td align="center">
+                  <button
+                    className="button_link"
+                    onClick={this.userregistraton()}
+                  >
+                    <b>New User!!</b>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div />
+          <p />
+          <p align="center">
+            {this.renderRedirect()}
+            <button className="button_login" onClick={this.usersignin}>
+              <b>Sign In</b>
+            </button>
+          </p>
+        </div>
       </div>
     );
   }

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import Categories from "./Categories";
+import ProductItem from "./ProductItem";
 import Cart from "./Cart";
-import ReactDOM from "react-dom";
 
 import "./../css/Navigation.css";
 
@@ -25,6 +25,8 @@ class Products extends Component {
     super(props);
     this.state = {
       page: 1,
+      prevPage: 1,
+      nextPage: 1,
       data: [],
       count: 0,
       loading: false
@@ -156,57 +158,6 @@ class Products extends Component {
   }
 
   /**
-   * This will be called when 'Add to Cart' is clicked against an item and the
-   * item will be added to Cart and quick view will be displayed on the rght panel
-   */
-  addToCart = (cartattributes, prodquantity, item) => e => {
-    for (let v of global.cartItemsArr) {
-      if (v.name === item.name) {
-        alert("Item already exists in the Cart...");
-
-        return;
-      }
-    }
-
-    let finalprice =
-      item.discounted_price === "0.00"
-        ? parseFloat(item.price)
-        : parseFloat(item.discounted_price);
-
-    let cartItem = {
-      item_id: item.product_id,
-      name: item.name,
-      attributes: cartattributes,
-      price: finalprice,
-      quantity: prodquantity,
-      subtotal: finalprice,
-      thumbnail: item.thumbnail
-    };
-
-    //Adding to shopping cart at the back end
-    let cartId = sessionStorage.getItem("shopping-cart-id");
-    Axios.post(`https://backendapi.turing.com/shoppingcart/add`, {
-      cart_id: cartId,
-      product_id: item.product_id,
-      attributes: item.thumbnail
-    })
-      .then(res => {
-        //console.log(res.data);
-        //Placeholder for UI update
-        global.cartItemsArr.push(cartItem);
-        var div = document.createElement("div");
-        ReactDOM.render(<Cart key={cartItem.item_id} item={cartItem} />, div);
-        document.getElementById("cartPane").childNodes[0].remove();
-        document.getElementById("cartPane").appendChild(div);
-      })
-      .catch(e => {
-        console.error("Failed to add to cart user:", e);
-        alert("Failed to add to cart user:");
-        return;
-      });
-  };
-
-  /**
    * Default component rendered
    */
   render() {
@@ -220,112 +171,91 @@ class Products extends Component {
     let mod = parseInt(this.state.count % 12) === 0 ? 0 : 1;
 
     counter = counter + mod;
+
+    //Pagination - PrevPage value
+    const prevPage =
+      parseInt(this.state.page) === 1 ? 1 : parseInt(this.state.page) - 1;
+    //Pagination - NextPage value
+    const nextPage =
+      parseInt(this.state.page) === counter
+        ? counter
+        : parseInt(this.state.page) + 1;
+
     // Creatinf Pagination buttons
-    for (var i = 1; i <= counter; i++) {
-      theCount.push(
-        <PageIdComponent key={i} name={i} onClick={this.clickNextPrev} />
+    if (counter > 1) {
+      //Prev button
+      if (counter > 1) {
+        theCount.push(
+          <PageIdComponent
+            key={-1}
+            name={" << "}
+            value={1}
+            page={this.state.page}
+            onClick={this.clickNextPrev}
+          />
+        );
+        theCount.push(
+          <PageIdComponent
+            key={0}
+            name={" < "}
+            value={prevPage}
+            page={this.state.page}
+            onClick={this.clickNextPrev}
+          />
+        );
+      }
+
+      for (var i = 1; i <= counter; i++) {
+        theCount.push(
+          <PageIdComponent
+            key={i}
+            name={i}
+            value={i}
+            page={this.state.page}
+            onClick={this.clickNextPrev}
+          />
+        );
+      }
+      if (counter > 1) {
+        theCount.push(
+          <PageIdComponent
+            key={counter + 1}
+            name={" > "}
+            value={nextPage}
+            page={this.state.page}
+            onClick={this.clickNextPrev}
+          />
+        );
+        theCount.push(
+          <PageIdComponent
+            key={counter + 2}
+            name={" >> "}
+            value={counter}
+            page={this.state.page}
+            onClick={this.clickNextPrev}
+          />
+        );
+      }
+    }
+
+    let theData = [];
+    let index = 0;
+
+    while (index < counter) {
+      theData.push(
+        <div className="column100" key={index}>
+          <ProductItem key={index} item={this.state.data[index++]} />
+
+          <ProductItem key={index + 1} item={this.state.data[++index]} />
+        </div>
       );
     }
 
     //this holds the Product items list
-    let theData = this.state.data.map((item, index) => {
+    /*let theData = this.state.data.map((item, index) => {
       //Generating the actual price comparing with discounted price
-      let thePrice = "";
-      if (item.discounted_price === "0.00") {
-        //No Discount
-        thePrice = (
-          <div>
-            <b className="textcol_orange">
-              <small>Price : </small>
-            </b>
-            <small>
-              <b className="textcol_maroon">&#36; {item.price}</b>{" "}
-            </small>
-            {"   "}
-            <small>No Discount </small>
-          </div>
-        );
-      } else {
-        //Discounted Price
-        thePrice = (
-          <div>
-            <b className="textcol_orange">
-              <small>Price : </small>
-            </b>
-            <b className="textcol_maroon">&#36; {item.discounted_price}</b>{" "}
-            {"    "}
-            <small
-              style={{
-                textDecorationLine: "line-through"
-              }}
-            >
-              {"    "} &#36; {item.price}
-            </small>
-          </div>
-        );
-      }
-      return (
-        <div className="prod-item" key={item.product_id}>
-          <div className="column">
-            <img
-              alt="/"
-              width="70%"
-              align="center"
-              src={require(`./../images/products/${item.thumbnail}`)}
-            />
-          </div>
-          <div className="column">
-            <b>{item.name}</b>
-            <p>
-              <small>{item.description}</small>
-            </p>
-            <p>
-              <small>
-                <b>Size: </b>{" "}
-              </small>
-              <input type="radio" name="size" id="size" value="XL" />
-              <small> Extra Large </small>
-              <input type="radio" name="size" value="L" />
-              <small> Large </small>
-              <input type="radio" name="size" value="M" />
-              <small> Medium </small>
-              <input type="radio" name="size" value="S" />
-              <small> Small </small>
-            </p>
-            <p>
-              <small>
-                <b>Quantity</b>(1 to 5):{" "}
-              </small>
-              <b>
-                <input
-                  className="textc"
-                  type="number"
-                  name="quantity"
-                  min="0"
-                  max="5"
-                  defaultValue="1"
-                />
-              </b>
-            </p>
-            {thePrice}
-            <p>
-              <button
-                className="prod_button"
-                key={item.name}
-                price={item.discounted_price}
-                onClick={this.addToCart("LG red", 1, item)}
-              >
-                <b>Add To Cart</b>
-              </button>
-              {"    "}
-              <button className="prod_button">
-                <b>Buy Now</b>
-              </button>
-            </p>
-          </div>
-        </div>
-      );
-    });
+      return <ProductItem key={item.product_id} item={item} />;
+    });*/
 
     // THis holds the message if the search result is empty
     if (theData.length !== undefined && theData.length === 0) {
@@ -368,8 +298,13 @@ class Products extends Component {
  * @param {*} props The value and click handle will be passed while creating
  */
 const PageIdComponent = props => {
+  var class_name =
+    parseInt(props.page) === parseInt(props.name)
+      ? "pagebutton_selected"
+      : "pagebutton";
+
   return (
-    <button className="pagebutton" onClick={props.onClick} value={props.name}>
+    <button className={class_name} onClick={props.onClick} value={props.value}>
       {props.name}
     </button>
   );

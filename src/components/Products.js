@@ -142,7 +142,7 @@ class Products extends Component {
         });
       })
       .catch(e => {
-        console.error("Failed to retrieve product informatio..", e);
+        console.error("Failed to retrieve product information..", e);
         this.setState({
           data: [],
           count: 0,
@@ -267,7 +267,7 @@ class Products extends Component {
 
     //this holds the Product items list
     // THis holds the message if the search result is empty
-    if (theData.length !== undefined && theData.length === 0) {
+    if (this.state.data.length !== undefined && this.state.data.length === 0) {
       theData = (
         <div>
           <h3 className="textcol_orange">Search Result</h3>

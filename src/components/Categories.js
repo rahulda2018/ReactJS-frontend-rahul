@@ -22,6 +22,7 @@ class Categories extends Component {
     super(props);
     this.state = {
       page: 1,
+      selected_cat_id: 0,
       data: [],
       count: 0,
       loading: false
@@ -117,15 +118,24 @@ class Categories extends Component {
     }
 
     let theData = this.state.data.map(item => {
+      let class_name = "category-button";
+      let lbl = "";
+      if (global.selectedCategory === item.category_id) {
+        class_name = "category-button_selected";
+        lbl = " >> ";
+      }
+
       return (
         <div key={item.category_id} align="left">
           <button
             key={item.category_id}
-            className="category-button"
+            className={class_name}
             onClick={this.setCategory(item)}
           >
             <small>
-              <b>{item.name}</b>
+              <b>
+                {item.name} {lbl}
+              </b>
             </small>
           </button>
         </div>

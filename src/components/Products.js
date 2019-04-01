@@ -23,6 +23,7 @@ class Products extends Component {
    */
   constructor(props) {
     super(props);
+    global.item_per_page = 16;
     this.state = {
       page: 1,
       prevPage: 1,
@@ -101,20 +102,31 @@ class Products extends Component {
     let selectedDep = parseInt(global.selectedDept);
     let query = global.searchQuery;
 
-    let url = `https://backendapi.turing.com/products?page=${page}&limit=12`;
+    let url = `https://backendapi.turing.com/products?page=${page}&limit=${
+      global.item_per_page
+    }`;
 
     if (selectedCat === 0 && selectedDep === 0) {
       if (global.searchQuery != null && global.searchQuery !== "") {
-        url = `https://backendapi.turing.com/products/search?query_string='${query}'&page=${page}&limit=12`;
+        url = `https://backendapi.turing.com/products/search?query_string='${query}'&page=${page}&limit=${
+          global.item_per_page
+        }`;
       } else {
-        url = `https://backendapi.turing.com/products?page=${page}&limit=12`;
+        url = `https://backendapi.turing.com/products?page=${page}&limit=${
+          global.item_per_page
+        }`;
       }
     } else if (selectedCat !== 0) {
-      url = `https://backendapi.turing.com/products/inCategory/${selectedCat}?page=${page}&limit=12`;
+      url = `https://backendapi.turing.com/products/inCategory/${selectedCat}?page=${page}&limit=${
+        global.item_per_page
+      }`;
     } else if (selectedCat === 0 && selectedDep !== 0) {
-      url = `https://backendapi.turing.com/products/inDepartment/${selectedDep}?page=${page}&limit=12`;
+      url = `https://backendapi.turing.com/products/inDepartment/${selectedDep}?page=${page}&limit=${
+        global.item_per_page
+      }`;
     }
 
+    //console.log(`Product URL: ${url} `);
     Axios.get(url)
       .then(json => {
         //console.log(json.data);
@@ -167,8 +179,9 @@ class Products extends Component {
 
     //Counting the number of pages can be fetched
     let theCount = [];
-    let counter = parseInt(this.state.count / 12);
-    let mod = parseInt(this.state.count % 12) === 0 ? 0 : 1;
+    let item_per_page = 16;
+    let counter = parseInt(this.state.count / item_per_page);
+    let mod = parseInt(this.state.count % item_per_page) === 0 ? 0 : 1;
 
     counter = counter + mod;
 
@@ -240,23 +253,19 @@ class Products extends Component {
 
     let theData = [];
     let index = 0;
+    let keyIndex = 0;
 
-    while (index < counter) {
+    while (index < item_per_page) {
       theData.push(
         <div className="column100" key={index}>
-          <ProductItem key={index} item={this.state.data[index++]} />
+          <ProductItem key={keyIndex++} item={this.state.data[index++]} />
 
-          <ProductItem key={index + 1} item={this.state.data[++index]} />
+          <ProductItem key={keyIndex++} item={this.state.data[index++]} />
         </div>
       );
     }
 
     //this holds the Product items list
-    /*let theData = this.state.data.map((item, index) => {
-      //Generating the actual price comparing with discounted price
-      return <ProductItem key={item.product_id} item={item} />;
-    });*/
-
     // THis holds the message if the search result is empty
     if (theData.length !== undefined && theData.length === 0) {
       theData = (

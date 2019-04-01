@@ -87,16 +87,13 @@ class ProductItem extends Component {
         thePrice = (
           <div>
             <div>
-              <b className="textcol_orange">
-                <small>Price : </small>
-              </b>
-              <small>
-                <b className="textcol_maroon">&#36; {item.price}</b>{" "}
-              </small>
+              <b className="form_price">&#36; {item.price}</b>{" "}
             </div>
             <div>
-              <small>
-                <i>No Discount</i>
+              <small className="textcol_maroon">
+                <b>
+                  <i>No Discount</i>
+                </b>
               </small>
             </div>
           </div>
@@ -106,12 +103,7 @@ class ProductItem extends Component {
         thePrice = (
           <div>
             <div>
-              <b className="textcol_orange">
-                <small>Price: </small>
-              </b>
-              <small>
-                <b className="textcol_maroon">&#36; {item.discounted_price}</b>
-              </small>{" "}
+              <b className="form_price">&#36; {item.discounted_price}</b>
               {"    "}
             </div>
             <div>
@@ -120,7 +112,12 @@ class ProductItem extends Component {
                   textDecorationLine: "line-through"
                 }}
               >
-                <b>M.R.P.</b> &#36;{item.price}
+                <i>
+                  <b className="textcol_maroon">
+                    M.R.P. &#36;
+                    {item.price}
+                  </b>
+                </i>
               </small>
             </div>
           </div>
@@ -153,7 +150,7 @@ class ProductItem extends Component {
             <p>
               <small>
                 <b className="textcol_orange">Size: </b> &nbsp;&nbsp;
-                <select name="size">
+                <select name="size" className="form_num">
                   <option value="XL">Extra Large</option>
                   <option value="L">Large</option>
                   <option value="M">Midium</option>
@@ -167,7 +164,12 @@ class ProductItem extends Component {
           <div className="column">
             <b>{item.name}</b>
             <div>
-              <StarRatingComponent name={item.name} startCount={5} />
+              <StarRatingComponent
+                key={item.product_id}
+                name={item.name}
+                value={3}
+                startCount={5}
+              />
             </div>
             <p>
               <small>{item.description}</small>

@@ -66,7 +66,7 @@ class UserProfile extends Component {
           custpostal_code: !json.data.postal_code ? "" : json.data.postal_code,
           custregion: !json.data.region ? "" : json.data.region,
           custshipping_region_id: !json.data.shipping_region_id
-            ? ""
+            ? 0
             : json.data.shipping_region_id
         });
       })
@@ -389,14 +389,18 @@ class UserProfile extends Component {
                     <i className="required" />:
                   </td>
                   <td alight="left">
-                    <input
-                      type="number"
+                    <select
                       name="custshipping_region_id"
+                      id="custshipping_region_id"
                       value={custshipping_region_id}
-                      placeholder="Shipping Region"
-                      onChange={this.handleInputChange}
                       className="form_text_small"
-                    />
+                      onChange={this.handleInputChange}
+                    >
+                      <option value={1}>Please Select</option>
+                      <option value={2}>US/Canada</option>
+                      <option value={3}>Europe</option>
+                      <option value={4}>Rest of World</option>
+                    </select>
                   </td>
                 </tr>
                 <tr>

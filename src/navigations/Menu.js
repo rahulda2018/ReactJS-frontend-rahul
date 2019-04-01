@@ -179,10 +179,7 @@ class Menu extends Component {
           {" "}
           <b>Hello !! </b>
           <i className="fa fa-user" />
-          &nbsp;{" "}
-          <b id="usernamemenu">
-            <small>{userName}</small>
-          </b>
+          &nbsp; <b id="usernamemenu">{userName}</b>
         </small>
       </NavLink>,
       <NavLink
@@ -249,27 +246,30 @@ class Menu extends Component {
         </nav>
         <nav className="submenu">
           <ul>
-            <small>
-              <li key="dept-label" className="submenu__list-item">
-                {" "}
-                <b className="textcol_white">Departments :</b>
-              </li>
-              <li key="all" className="submenu__list-item">
-                <NavLink
-                  key="all"
-                  className="submenu__link"
-                  to="/all"
-                  exact
-                  activeClassName={"submenu__link submenu__link--active"}
-                  onClick={this.setDepartments(0)}
-                >
-                  <b>
-                    <small>All</small>
-                  </b>
-                </NavLink>
-              </li>
-              {linksSubmenu}
-            </small>
+            <li key="dept-label" className="submenu__list-item">
+              <b>
+                <b className="submenu__head">
+                  SHOPMATE
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </b>
+              </b>
+            </li>
+            <li key="all" className="submenu__list-item">
+              <NavLink
+                key="all"
+                className="submenu__link"
+                to="/all"
+                exact
+                activeClassName={"submenu__link submenu__link--active"}
+                onClick={this.setDepartments(0)}
+              >
+                <b>
+                  <small>All</small>
+                </b>
+              </NavLink>
+            </li>
+            {linksSubmenu}
           </ul>
 
           <div className="menu__right">

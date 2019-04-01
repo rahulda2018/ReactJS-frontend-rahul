@@ -56,75 +56,73 @@ class Registration extends Component {
     return (
       <div align="center">
         <p />
-        <div className="form_div">
+        <div align="center" className="form_div">
           <h3 className="textcol_orange">User Registration </h3>
           <small>
-            <b>
-              <table>
-                <tbody>
-                  <tr>
-                    <td className="form_textlabel">
-                      Full Name:
-                      <i className="required" />
-                    </td>
-                    <td alight="left">
-                      <input
-                        type="text"
-                        id="reg-name"
-                        name="reg-name"
-                        placeholder="Full name"
-                        className="form_text"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="form_textlabel">
-                      New Password:
-                      <i className="required" />
-                    </td>
-                    <td>
-                      <input
-                        type="password"
-                        id="reg-password"
-                        name="reg-password"
-                        placeholder="New Password"
-                        className="form_text"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="form_textlabel">
-                      Confirm Password:
-                      <i className="required" />
-                    </td>
-                    <td>
-                      <input
-                        type="password"
-                        id="reg-confirm_password"
-                        name="reg-confirm_password"
-                        placeholder="Confirm Password"
-                        className="form_text"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="form_textlabel">
-                      Email Address:
-                      <i className="required" />
-                    </td>
-                    <td alight="left">
-                      <input
-                        type="text"
-                        id="reg-email"
-                        name="reg-email"
-                        placeholder="Email address"
-                        className="form_text"
-                      />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </b>
+            <table>
+              <tbody>
+                <tr>
+                  <td className="form_textlabel">
+                    Full Name:
+                    <i className="required" />
+                  </td>
+                  <td alight="left">
+                    <input
+                      type="text"
+                      id="reg-name"
+                      name="reg-name"
+                      placeholder="Full name"
+                      className="form_text"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="form_textlabel">
+                    New Password:
+                    <i className="required" />
+                  </td>
+                  <td>
+                    <input
+                      type="password"
+                      id="reg-password"
+                      name="reg-password"
+                      placeholder="New Password"
+                      className="form_text"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="form_textlabel">
+                    Confirm Password:
+                    <i className="required" />
+                  </td>
+                  <td>
+                    <input
+                      type="password"
+                      id="reg-confirm_password"
+                      name="reg-confirm_password"
+                      placeholder="Confirm Password"
+                      className="form_text"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="form_textlabel">
+                    Email Address:
+                    <i className="required" />
+                  </td>
+                  <td alight="left">
+                    <input
+                      type="text"
+                      id="reg-email"
+                      name="reg-email"
+                      placeholder="Email address"
+                      className="form_text"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </small>
           <div align="center">
             <p>
